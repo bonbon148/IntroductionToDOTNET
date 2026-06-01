@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fraction", "Fraction\Fraction.csproj", "{F60F780E-F024-4EB7-BAEB-9A39C499CEA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arrays", "Arrays\Arrays.csproj", "{02E8F48D-B2D5-4003-9C46-72B4B6211046}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F60F780E-F024-4EB7-BAEB-9A39C499CEA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F60F780E-F024-4EB7-BAEB-9A39C499CEA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F60F780E-F024-4EB7-BAEB-9A39C499CEA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02E8F48D-B2D5-4003-9C46-72B4B6211046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02E8F48D-B2D5-4003-9C46-72B4B6211046}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02E8F48D-B2D5-4003-9C46-72B4B6211046}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02E8F48D-B2D5-4003-9C46-72B4B6211046}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
