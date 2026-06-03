@@ -6,121 +6,147 @@ using System.Threading.Tasks;
 
 namespace Fraction
 {
-    internal class Fraction
-    {
-        public int Integer { get; set; }    //Автоствойсто, описывающее целую часть
-        public int Numerator { get; set; }  //Автоствойсто, описывающее числитель 
-        int denominator;    //Переменная, описывающая знаменатель
-        public int Denominator  //Свойство, описывающее знаменатель 
-        {
-            get => denominator; //Если метод можно реализвоать одним выражением,
-                                //то его можно написать без фигурных скобок,
-                                //вместо этого, после круглых скобок ставится => (скаречнэк)
-            set => denominator = value == 0 ? 1 : value;
-        }
+	internal class Fraction
+	{
+		public int Integer { get; set; }    //Автоствойсто, описывающее целую часть
+		public int Numerator { get; set; }  //Автоствойсто, описывающее числитель 
+		int denominator;    //Переменная, описывающая знаменатель
+		public int Denominator  //Свойство, описывающее знаменатель 
+		{
+			get => denominator; //Если метод можно реализвоать одним выражением,
+								//то его можно написать без фигурных скобок,
+								//вместо этого, после круглых скобок ставится => (скаречнэк)
+			set => denominator = value == 0 ? 1 : value;
+		}
 
-        //              Constructors:
-        public Fraction()
-        {
-            this.Integer = 0;
-            this.Numerator = 0;
-            this.Denominator = 1;
-            Console.WriteLine($"DefaultConstructor:{this.GetHashCode()}");
-        }
-        public Fraction(int integer)
-        {
-            this.Integer = integer;
-            this.Numerator = 0;
-            this.Denominator = 1;
-            Console.WriteLine($"Single-ArgumentConstructor:{GetHashCode()}");            
-        }
-        public Fraction(int numerator, int denominator)
-        {
-            this.Integer = 0;
-            this.Numerator = numerator;
-            this.Denominator = denominator;
-            Console.WriteLine($"Constructor:\t{GetHashCode()}");
-        }
-        public Fraction(int integer, int numerator, int denominator)
-        {
-            this.Integer = integer;
-            this.Numerator = numerator;
-            this.Denominator = denominator;
-            Console.WriteLine($"Constructor:\t{GetHashCode()}");
-        }
+		//              Constructors:
+		public Fraction()
+		{
+			this.Integer = 0;
+			this.Numerator = 0;
+			this.Denominator = 1;
+			Console.WriteLine($"DefaultConstructor:{this.GetHashCode()}");
+		}
+		public Fraction(int integer)
+		{
+			this.Integer = integer;
+			this.Numerator = 0;
+			this.Denominator = 1;
+			Console.WriteLine($"Single-ArgumentConstructor:{GetHashCode()}");
+		}
+		public Fraction(int numerator, int denominator)
+		{
+			this.Integer = 0;
+			this.Numerator = numerator;
+			this.Denominator = denominator;
+			Console.WriteLine($"Constructor:\t{GetHashCode()}");
+		}
+		public Fraction(int integer, int numerator, int denominator)
+		{
+			this.Integer = integer;
+			this.Numerator = numerator;
+			this.Denominator = denominator;
+			Console.WriteLine($"Constructor:\t{GetHashCode()}");
+		}
 
-        public Fraction(Fraction other)
-        {
-            this.Integer = other.Integer;
-            this.Numerator = other.Numerator;
-            this.Denominator = other.Denominator;
-            Console.WriteLine($"CopyConstructor:\t{GetHashCode()}");
-        }
+		public Fraction(Fraction other)
+		{
+			this.Integer = other.Integer;
+			this.Numerator = other.Numerator;
+			this.Denominator = other.Denominator;
+			Console.WriteLine($"CopyConstructor:\t{GetHashCode()}");
+		}
 
-        //               Operators:
-        public static Fraction operator *(Fraction l, Fraction r)
-        {
-            Fraction left = new Fraction(l);
-            Fraction right = new Fraction(r);
-            left.ToImproper();
-            right.ToImproper();
-            return new Fraction(left.Numerator * right.Numerator, left.Denominator * right.Denominator)
-            .Reduse()
-            .ToProper();
-        }
-        public static Fraction operator/(Fraction left, Fraction right)
-        {
-            return left * right.Inverted();
-        }
+		~Fraction()
+		{
+			Console.WriteLine($"Destructor:\t{GetHashCode()}");
+		}
 
-        //                Methods:
-        Fraction Reduse()
-        {
-            int more = Numerator, less = Denominator;
-            int rest;
-            do
-            {
-                rest = more % less;
-                more = less;
-                less = rest;
-            } while (rest != 0);
-            int GCD = more;
-            Numerator /= GCD;
-            Denominator /= GCD;
-            return this;
-        }
-        Fraction Inverted()
-        {
-            Fraction inverted = new Fraction(this);
-            inverted.ToImproper();
-            (inverted.Numerator, inverted.Denominator) = (inverted.Denominator, inverted.Numerator);
-            return inverted;
-        }
-        Fraction ToProper()
-        {
-            Integer += Numerator / Denominator;
-            Numerator %= Denominator;
-            return this;
-        }
-        Fraction ToImproper()
-        {
-            Numerator += Integer * Denominator;
-            Integer = 0;
-            return this;
-        }
-        public void Print()
-        {
+		//               Operators:
+		public static Fraction operator *(Fraction l, Fraction r)
+		{
+			Fraction left = new Fraction(l);
+			Fraction right = new Fraction(r);
+			left.ToImproper();
+			right.ToImproper();
+			return new Fraction(left.Numerator * right.Numerator, left.Denominator * right.Denominator)
+			.Reduse()
+			.ToProper();
+		}
+		public static Fraction operator /(Fraction left, Fraction right)
+		{
+			return left * right.Inverted();
+		}
 
-            if (Integer != 0) Console.Write(Integer);
-            if (Numerator != 0)
-            {
-                if (Integer != 0) Console.Write("(");
-                Console.Write($"{Numerator}/{Denominator}");
-                if (Integer != 0) Console.Write(")");
-            }
-            else if (Integer == 0) Console.Write(0);
-            Console.WriteLine();
-                    
-        }
-    }
+		//			Increment/Dectrement:
+		public static Fraction operator ++(Fraction obj)
+		{
+			obj.Integer++;
+			return new Fraction(obj);
+		}
+
+		//				Comparison operators:
+		public static bool operator ==(Fraction l, Fraction r)
+		{
+			Fraction left = new Fraction(l);
+			Fraction right = new Fraction(r);
+			left.ToImproper();
+			right.ToImproper();
+			return left.Numerator*right.Denominator == right.Numerator * left.Denominator;
+		}
+		public static bool operator !=(Fraction left, Fraction right)
+		{
+			return !(left == right);
+		}
+
+		//                Methods:
+		Fraction Reduse()
+		{
+			int more = Numerator, less = Denominator;
+			int rest;
+			do
+			{
+				rest = more % less;
+				more = less;
+				less = rest;
+			} while (rest != 0);
+			int GCD = more;
+			Numerator /= GCD;
+			Denominator /= GCD;
+			return this;
+		}
+		Fraction Inverted()
+		{
+			Fraction inverted = new Fraction(this);
+			inverted.ToImproper();
+			(inverted.Numerator, inverted.Denominator) = (inverted.Denominator, inverted.Numerator);
+			return inverted;
+		}
+		Fraction ToProper()
+		{
+			Integer += Numerator / Denominator;
+			Numerator %= Denominator;
+			return this;
+		}
+		Fraction ToImproper()
+		{
+			Numerator += Integer * Denominator;
+			Integer = 0;
+			return this;
+		}
+		public void Print()
+		{
+
+			if (Integer != 0) Console.Write(Integer);
+			if (Numerator != 0)
+			{
+				if (Integer != 0) Console.Write("(");
+				Console.Write($"{Numerator}/{Denominator}");
+				if (Integer != 0) Console.Write(")");
+			}
+			else if (Integer == 0) Console.Write(0);
+			Console.WriteLine();
+
+		}
+	}
 }
